@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FD9A7E9D-1377-4D30-892A-FE610AF39F77}</ProjectGuid>
+    <RootNamespace>GraphicsEngine</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v100</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>$(DXSDK_DIR)LIB\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>$(DXSDK_DIR)LIB\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(DXSDK_DIR)include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(DXSDK_DIR)include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="componentFurRenderer.h" />
+    <ClInclude Include="GameObject\Component\componentCollider.h" />
+    <ClInclude Include="GameObject\Component\componentColliderBox.h" />
+    <ClInclude Include="GameObject\Component\componentColliderConvexVertices.h" />
+    <ClInclude Include="GameObject\Component\componentColliderSphere.h" />
+    <ClInclude Include="GameObject\Component\componentContactListener.h" />
+    <ClInclude Include="GameObject\Component\componentGUIRenderer.h" />
+    <ClInclude Include="GameObject\Component\componentModelRenderer.h" />
+    <ClInclude Include="GameObject\Component\componentRenderer.h" />
+    <ClInclude Include="GameObject\Component\componentRigidBody.h" />
+    <ClInclude Include="GameObject\Component\componentSpriteRenderer.h" />
+    <ClInclude Include="GameObject\Component\iComponent.h" />
+    <ClInclude Include="GameObject\Component\transformation.h" />
+    <ClInclude Include="GameObject\gameObject.h" />
+    <ClInclude Include="GameObject\GUI\guiButton.h" />
+    <ClInclude Include="Graphics\Camera\camera.h" />
+    <ClInclude Include="Graphics\Camera\cameraManager.h" />
+    <ClInclude Include="Graphics\Camera\cameraOrtho.h" />
+    <ClInclude Include="Graphics\Camera\cameraProjection.h" />
+    <ClInclude Include="Graphics\Font\cachedText.h" />
+    <ClInclude Include="Graphics\Font\font.h" />
+    <ClInclude Include="Graphics\Font\fontManager.h" />
+    <ClInclude Include="Graphics\Font\fontTypes.h" />
+    <ClInclude Include="Graphics\Font\textPrinter.h" />
+    <ClInclude Include="Graphics\graphicsEngine.h" />
+    <ClInclude Include="Graphics\graphicsResourceManager.h" />
+    <ClInclude Include="Graphics\material.h" />
+    <ClInclude Include="Graphics\materialsManager.h" />
+    <ClInclude Include="Graphics\mesh.h" />
+    <ClInclude Include="Graphics\renderHelper.h" />
+    <ClInclude Include="Graphics\RenderTarget\renderTarget.h" />
+    <ClInclude Include="Graphics\RenderTarget\renderTarget2D.h" />
+    <ClInclude Include="Graphics\RenderTarget\renderTarget2D_DS.h" />
+    <ClInclude Include="Graphics\RenderTarget\renderTargetsStack.h" />
+    <ClInclude Include="Graphics\shader.h" />
+    <ClInclude Include="Graphics\shaderManager.h" />
+    <ClInclude Include="Graphics\texture.h" />
+    <ClInclude Include="Graphics\textureDynamic.h" />
+    <ClInclude Include="Input\gamepadDefines.h" />
+    <ClInclude Include="Input\inputManager.h" />
+    <ClInclude Include="Physics\Phantom\phantomAABB.h" />
+    <ClInclude Include="Physics\Phantom\phantomBoxSimple.h" />
+    <ClInclude Include="Physics\Phantom\phantomShapeSimple.h" />
+    <ClInclude Include="Physics\Phantom\phantomSphereSimple.h" />
+    <ClInclude Include="Physics\physicsEngine.h" />
+    <ClInclude Include="Scene\scene.h" />
+    <ClInclude Include="Scene\sceneInterfaces.h" />
+    <ClInclude Include="Scene\sceneManager.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Util\converter.h" />
+    <ClInclude Include="Util\mathInline.h" />
+    <ClInclude Include="Util\mathUtils.h" />
+    <ClInclude Include="window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="componentFurRenderer.cpp" />
+    <ClCompile Include="GameObject\Component\componentCollider.cpp" />
+    <ClCompile Include="GameObject\Component\componentColliderBox.cpp" />
+    <ClCompile Include="GameObject\Component\componentColliderConvexVertices.cpp" />
+    <ClCompile Include="GameObject\Component\componentColliderSphere.cpp" />
+    <ClCompile Include="GameObject\Component\componentContactListener.cpp" />
+    <ClCompile Include="GameObject\Component\componentGUIRenderer.cpp" />
+    <ClCompile Include="GameObject\Component\componentModelRenderer.cpp" />
+    <ClCompile Include="GameObject\Component\componentRenderer.cpp" />
+    <ClCompile Include="GameObject\Component\componentRigidBody.cpp" />
+    <ClCompile Include="GameObject\Component\componentSpriteRenderer.cpp" />
+    <ClCompile Include="GameObject\Component\transformation.cpp" />
+    <ClCompile Include="GameObject\gameObject.cpp" />
+    <ClCompile Include="GameObject\GUI\guiButton.cpp" />
+    <ClCompile Include="Graphics\Camera\camera.cpp" />
+    <ClCompile Include="Graphics\Camera\cameraManager.cpp" />
+    <ClCompile Include="Graphics\Camera\cameraProjection.cpp" />
+    <ClCompile Include="Graphics\Camera\сameraOrtho.cpp" />
+    <ClCompile Include="Graphics\Font\cachedText.cpp" />
+    <ClCompile Include="Graphics\Font\font.cpp" />
+    <ClCompile Include="Graphics\Font\fontManager.cpp" />
+    <ClCompile Include="Graphics\Font\textPrinter.cpp" />
+    <ClCompile Include="Graphics\graphicsEngine.cpp" />
+    <ClCompile Include="Graphics\graphicsResourceManager.cpp" />
+    <ClCompile Include="Graphics\material.cpp" />
+    <ClCompile Include="Graphics\materialsManager.cpp" />
+    <ClCompile Include="Graphics\mesh.cpp" />
+    <ClCompile Include="Graphics\renderHelper.cpp" />
+    <ClCompile Include="Graphics\RenderTarget\renderTarget.cpp" />
+    <ClCompile Include="Graphics\RenderTarget\renderTarget2D.cpp" />
+    <ClCompile Include="Graphics\RenderTarget\renderTarget2D_DS.cpp" />
+    <ClCompile Include="Graphics\RenderTarget\renderTargetsStack.cpp" />
+    <ClCompile Include="Graphics\shader.cpp" />
+    <ClCompile Include="Graphics\shaderManager.cpp" />
+    <ClCompile Include="Graphics\texture.cpp" />
+    <ClCompile Include="Graphics\textureDynamic.cpp" />
+    <ClCompile Include="Input\inputManager.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Physics\Phantom\phantomAABB.cpp" />
+    <ClCompile Include="Physics\Phantom\phantomBoxSimple.cpp" />
+    <ClCompile Include="Physics\Phantom\phantomShapeSimple.cpp" />
+    <ClCompile Include="Physics\Phantom\phantomSphereSimple.cpp" />
+    <ClCompile Include="Physics\physicsEngine.cpp" />
+    <ClCompile Include="Scene\scene.cpp" />
+    <ClCompile Include="Scene\sceneManager.cpp" />
+    <ClCompile Include="Util\mathUtils.cpp" />
+    <ClCompile Include="window.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
