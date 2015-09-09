@@ -1,17 +1,4 @@
-cbuffer MatrixProjection : register(b0)
-{
-    matrix projectionMatrix;
-}
- 
-cbuffer MatrixView : register(b1)
-{
-    matrix viewMatrix;
-}
- 
-cbuffer MatrixWorld : register(b2)
-{
-    matrix worldMatrix;
-}
+#include "variables.fx"
 
 Texture2D shaderTexture;
 SamplerState SampleType;
@@ -34,10 +21,7 @@ PixelInputType VShader(VertexInputType input)
     PixelInputType output;
 	
 	input.position.w = 1.0f;
-	
-    matrix mvp = mul( projectionMatrix, mul( viewMatrix, worldMatrix ) );
-    output.position = mul( mvp, input.position );
-	
+    output.position = mul(_MatrixMVP, input.position );
     output.tex = input.tex;
     
     return output;
@@ -45,5 +29,5 @@ PixelInputType VShader(VertexInputType input)
 
 float4 PShader(PixelInputType input) : SV_Target
 {
-    return shaderTexture.Sample(SampleType, input.tex);
+    return shaderTexture.Sample(SampleType, input.tex) * _Color;
 }

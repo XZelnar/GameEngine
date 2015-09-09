@@ -15,23 +15,19 @@ ComponentModelRenderer::ComponentModelRenderer() : ComponentRenderer()
 	//effect = (Effect*)EffectsManager::GetDefaultEffect();//TODO
 }
 
-void ComponentModelRenderer::Initialize(GameObject* _parent)
-{
-	parent = _parent;
-	pTransformation = parent->GetTransformation();
-}
-
 void ComponentModelRenderer::SetMesh(Mesh* m)
 {
 	mesh = m;
 }
 
-void ComponentModelRenderer::Render()
+void ComponentModelRenderer::Render(D3DXMATRIX* world)
 {
-	if (material && mesh && IsVisible && GraphicsEngine::GetRenderPass() != RENDER_PASS_TYPE::RP_GUI)
+	assert(material);
+	assert(mesh);
+	if (IsVisible && GraphicsEngine::GetRenderPass() != RENDER_PASS_TYPE::RP_GUI)
 	{
 		material->Activate();
-		ShaderManager::SetObjectTransformation(pTransformation);
+		ShaderManager::SetMatrixWorld(world);
 		mesh->Render();
 	}
 }

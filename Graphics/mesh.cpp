@@ -88,6 +88,14 @@ void Mesh::SetRawData(void* _data, int _vertexCount, int _sizeOfData, UINT _stri
 	updateVBO();
 }
 
+Mesh::VERTEX Mesh::GetVertex(int index)
+{
+	if (index < 0) index = 0;
+	if (index >= GetVertexCount()) index = GetVertexCount() - 1;
+	if (vertices == null) throw exception("Attempting to get vertices from Mesh, that was created from raw data");
+	return vertices[index];
+}
+
 #if DEBUG
 void Mesh::SetName(char* name)
 {

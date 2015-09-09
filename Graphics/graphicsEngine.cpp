@@ -289,6 +289,7 @@ void GraphicsEngine::OnWM_SIZE()
 
 void GraphicsEngine::Update()
 {
+	ShaderManager::Update();
 	CameraManager::Update();
 }
 

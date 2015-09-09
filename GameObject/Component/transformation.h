@@ -47,7 +47,7 @@ private:
 	D3DXVECTOR3 rotation;
 	D3DXVECTOR3 scale;
 	D3DXMATRIX preMatrix, postMatrix;
-	D3DXMATRIX mWorld, mPos, mRot, mRotX, mRotY, mRotZ, mScale;
+	D3DXMATRIX mWorld, mWorldWParent, mPos, mRot, mRotX, mRotY, mRotZ, mScale;
 	bool recalculate;
 	bool parentHasRigidBody, parentHasCollider;
 };

@@ -21,8 +21,9 @@ public:
 	virtual void SetRotation(float rot);
 	virtual void SetPosition(D3DXVECTOR2 pos);
 	virtual void Update() { }
-	virtual void Render() { }
-	virtual void GUI();
+	virtual void Render(D3DXMATRIX* world) { }
+	virtual void GUI() { GUI(&mWorld); }
+	virtual void GUI(D3DXMATRIX* world);
 
 protected:
 	virtual void updateMatrix();

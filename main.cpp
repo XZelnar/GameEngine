@@ -5,6 +5,7 @@
 #include "Physics/physicsEngine.h"
 #include "Input/inputManager.h"
 #include "Scene/sceneManager.h"
+#include "Util/time.h"
 
 #include "Graphics/graphicsResourceManager.h"
 #include "Scene/scene.h"
@@ -18,7 +19,10 @@
 #include "Graphics/material.h"
 #include "Graphics/Camera/cameraManager.h"
 #include "Graphics/Camera/cameraProjection.h"
-#include "GameObject\Component\transformation.h"
+#include "GameObject/Component/transformation.h"
+#include "GameObject/Component/componentParticleSystem.h"
+#include "Graphics/ParticleSystem/psEmitterMesh.h"
+#include "engineValue.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -33,13 +37,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	auto a = new Scene();
 	GameObject* f, *g;
 	Material* mat;
+	ComponentModelRenderer* cmr;
 
 	//floor
 	{
 		f = new GameObject();
 		f->SetPosition(0, -20, 0);
 		f->SetScale(D3DXVECTOR3(100, 1, 100));
-		auto r = new ComponentModelRenderer();
+		auto r = cmr = new ComponentModelRenderer();
 		r->SetMesh(GraphicsResourceManager::GetInstance().GetMesh(L"Resources/box.obj"));
 		auto fmat = new Material(GraphicsResourceManager::GetInstance().GetShader(L"Resources/Shaders/simple.fx"));
 		fmat->SetTexture(GraphicsResourceManager::GetInstance().GetTexture(L"Resources/texel.png"), 0);
@@ -56,10 +61,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	{
 		g = new GameObject();
 		g->SetPosition(0, 0, 0);
-		g->SetRotation(D3DXVECTOR3(D3DX_PI / 2 - 0.01f, 2.7f, 0));
+		//g->SetRotation(D3DXVECTOR3(D3DX_PI / 2 - 0.01f, 2.7f, 0));
 		auto r = new ComponentFurRenderer();
-		r->iterations = 50;
-		r->materialIterVarIndex = 4;
+		r->iterations = 40;
 		r->SetMesh(GraphicsResourceManager::GetInstance().GetMesh(L"Resources/torus.obj"));
 		mat = new Material(GraphicsResourceManager::GetInstance().GetShader(L"Resources/Shaders/fur.fx"));
 		mat->SetTexture(GraphicsResourceManager::GetInstance().GetTexture(L"Resources/mask.png"), 1);
@@ -69,6 +73,18 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		g->SetCollider(c);
 		auto rb = new ComponentRigidBody(1.0f);
 		g->SetRigidBody(rb);
+
+		auto ps = new ComponentParticleSystem(2048);
+		ps->SetRenderer(cmr);
+		ps->simulateInWorldSpace = true;
+		ps->gravity = D3DXVECTOR3(0, 0, 0);
+		ps->SetParticleLifetime(1);
+		ps->SetEmitParticlesPerSecond(600);
+		ps->SetSizeOverLifetime(new ValueLinear<D3DXVECTOR3>(D3DXVECTOR3(.2f, .2f, .2f), D3DXVECTOR3(0, 0, 0)));
+		ps->SetColorOverLifetime(new ValueConstant<D3DXVECTOR4>(D3DXVECTOR4(0.2f, 0.8f, 0.5f, 1)));
+		auto pse = new psEmitterMesh(r->GetMesh(), psEmitterMesh::EmissionSource::ES_Points);
+		ps->SetEmitter(pse);
+		g->SetParticleSystem(ps);
 	}
 
 	//fur texture
@@ -85,8 +101,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	t->SetPixels(arr);
 	delete[] arr;
 	mat->SetTexture(t);
-	mat->SetVertexCBuffer(3, D3DXVECTOR4(3, 0, -1, 0));
-	mat->SetVertexCBuffer(4, D3DXVECTOR4(0, 0, 0, 0));
+	mat->SetCBuffer("FurInfo", D3DXVECTOR4(3, 0, -1, 0));
+	mat->SetCBuffer("IterationInfo", D3DXVECTOR4(0, 0, 0, 0));
 
 	//general
 	a->AddSceneObject(g);
@@ -125,6 +141,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 #endif
 
 		cp->SetLookAt(g->GetTransformation()->GetPosition());
+
+		Time::Update();
 		
 		SceneManager::PreInput();
 		InputManager::Update();

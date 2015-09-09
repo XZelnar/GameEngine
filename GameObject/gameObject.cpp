@@ -4,6 +4,7 @@
 #include "Component/componentRigidBody.h"
 #include "Component/componentContactListener.h"
 #include "Component/componentRenderer.h"
+#include "Component/componentParticleSystem.h"
 #include "Component/transformation.h"
 
 unsigned int GameObject::CurID = 1;
@@ -15,6 +16,7 @@ GameObject::GameObject()
 	rigidBody = NULL;
 	contactListener = NULL;
 	renderer = NULL;
+	particleSystem = null;
 	transformation = new Transformation(this);
 }
 
@@ -31,6 +33,8 @@ void GameObject::Initialize()
 		contactListener->Initialize(this);
 	if (renderer)
 		renderer->Initialize(this);
+	if (particleSystem)
+		particleSystem->Initialize(this);
 
 	for (auto a = children.begin(); a != children.end(); a++)
 		(*a)->Initialize();
@@ -66,6 +70,11 @@ void GameObject::Dispose()
 	{
 		renderer->Dispose();
 		delete renderer;
+	}
+	if (particleSystem)
+	{
+		particleSystem->Dispose();
+		delete particleSystem;
 	}
 }
 
@@ -170,6 +179,13 @@ void GameObject::SetRenderer(ComponentRenderer* _renderer)
 	renderer = _renderer;
 }
 
+void GameObject::SetParticleSystem(ComponentParticleSystem* _particleSystem)
+{
+	if (particleSystem)
+		particleSystem->Dispose();
+	particleSystem = _particleSystem;
+}
+
 void GameObject::AddChild(GameObject* o)
 {
 	bool found = false;
@@ -214,6 +230,8 @@ void GameObject::Update()
 		rigidBody->Update();
 	if (renderer)
 		renderer->Update();
+	if (particleSystem)
+		particleSystem->Update();
 
 	for (auto a = children.begin(); a != children.end(); a++)
 		(*a)->Update();
@@ -223,6 +241,8 @@ void GameObject::Render()
 {
 	if (renderer)
 		renderer->Render();
+	if (particleSystem)
+		particleSystem->Render();
 
 	for (auto a = children.begin(); a != children.end(); a++)
 		(*a)->Render();
@@ -232,6 +252,8 @@ void GameObject::GUI()
 {
 	if (renderer)
 		renderer->GUI();
+	if (particleSystem)
+		particleSystem->GUI();
 
 	for (auto a = children.begin(); a != children.end(); a++)
 		(*a)->GUI();

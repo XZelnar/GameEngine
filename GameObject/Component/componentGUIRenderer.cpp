@@ -25,19 +25,19 @@ void ComponentGUIRenderer::SetBorder(float b, float bPix)
 	updateMatrix();
 }
 
-void ComponentGUIRenderer::GUI()
+void ComponentGUIRenderer::GUI(D3DXMATRIX* world)
 {
-	if (!texture || !IsVisible)
+	assert(texture);
+	assert(material);
+	if (!IsVisible)
 		return;
-	if (!material)
-		;//mat = (Effect*)EffectsManager::GetGUIEffect();//TODO
 
 	static UINT stride = sizeof(VERTEX);
 	static UINT offset = 0;
 	
 	material->Activate();
 	texture->ApplyTexture();
-	ShaderManager::SetMatrixWorld(&mWorld);
+	ShaderManager::SetMatrixWorld(world);
 	devcon->IASetVertexBuffers(0, 1, &vBuffer, &stride, &offset);
 	devcon->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	devcon->Draw(54, 0);

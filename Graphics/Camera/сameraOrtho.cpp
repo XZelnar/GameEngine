@@ -33,10 +33,12 @@ void CameraOrtho::updateViewMatrix()
 {
 	recalculateViewMatrix = false;
 	D3DXMatrixTranslation(&viewMatrix, -Window::GetWidth() / 2, -Window::GetHeight() / 2, 0);
+	updateViewProjectionMatrix();
 }
 
 void CameraOrtho::updateProjectionMatrix()
 {
 	recalculateProjectionMatrix = false;
 	D3DXMatrixOrthoLH(&projectionMatrix, Window::GetWidth(), -Window::GetHeight(), 0, 1);
+	updateViewProjectionMatrix();
 }

@@ -6,18 +6,18 @@
 #include "Graphics/material.h"
 
 
-void ComponentFurRenderer::Render()
+void ComponentFurRenderer::Render(D3DXMATRIX* world)
 {
 	if (material && mesh && IsVisible && GraphicsEngine::GetRenderPass() != RENDER_PASS_TYPE::RP_GUI)
 	{
-		material->SetVertexCBuffer(materialIterVarIndex, D3DXVECTOR4(0, 0, 0, 0));
-		ComponentModelRenderer::Render();
+		//material->SetCBuffer("IterationInfo", D3DXVECTOR4(0, 0, 0, 0));
+		//ComponentModelRenderer::Render(world);
 		//GraphicsEngine::DisableDepth();
 		material->Activate();
-		ShaderManager::SetObjectTransformation(pTransformation);
-		for (float i = 1; i < iterations; i++)
+		ShaderManager::SetMatrixWorld(world);
+		for (float i = 0; i < iterations; i++)
 		{
-			material->SetVertexCBuffer(materialIterVarIndex, D3DXVECTOR4(i / iterations, 0, 0, 0));
+			material->SetCBuffer("IterationInfo", D3DXVECTOR4(i / iterations, 0, 0, 0));
 			mesh->Render();
 		}
 		//GraphicsEngine::EnableDepth();

@@ -4,7 +4,7 @@
 
 class Material;
 
-static class MaterialsManager
+class MaterialsManager
 {
 	friend class Material;
 	friend class GraphicsEngine;
@@ -14,6 +14,7 @@ private:
 	static void Dispose();
 	static void addMaterial(Material* m);
 	static void setActive(Material* m);
+	static bool isActive(Material* m) { return active == m; }
 
 private:
 	static std::vector<Material*> materials;

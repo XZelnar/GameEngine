@@ -7,7 +7,7 @@ class CameraProjection : public Camera
 public:
 	CameraProjection();
 	CameraProjection(float fov, float nearPlane, float farPlane);
-	D3DXVECTOR3 GetPosition();
+	virtual D3DXVECTOR3 GetPosition();
 	void SetPosition(D3DXVECTOR3 pos, bool moveLookAt = false);
 	void SetPosition(D3DXVECTOR3 pos, D3DXVECTOR3 _lookAt);
 	void MoveCamera(D3DXVECTOR3 delta, bool moveLookAt = true);
@@ -23,7 +23,6 @@ protected:
 	virtual void updateProjectionMatrix();
 
 protected:
-	D3DXVECTOR3 position;
 	D3DXVECTOR3 lookAt;
 	D3DXVECTOR3 upVector;
 	float nearClipPlane;

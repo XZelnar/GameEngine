@@ -99,10 +99,12 @@ void CameraProjection::updateViewMatrix()
 {
 	recalculateViewMatrix = false;
 	D3DXMatrixLookAtLH(&viewMatrix, &position, &lookAt, &upVector);
+	updateViewProjectionMatrix();
 }
 
 void CameraProjection::updateProjectionMatrix()
 {
 	recalculateProjectionMatrix = false;
 	D3DXMatrixPerspectiveFovLH(&projectionMatrix, fov, Window::GetWidth() / Window::GetHeight(), nearClipPlane, farClipPlane);
+	updateViewProjectionMatrix();
 }

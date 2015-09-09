@@ -30,6 +30,7 @@
 
 #include "Util/mathInline.h"
 #include "Util/converter.h"
+#include "engineValue.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dx11.lib")

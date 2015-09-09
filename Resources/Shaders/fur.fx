@@ -1,25 +1,12 @@
-cbuffer MatrixProjection : register(b0)
-{
-    matrix projectionMatrix;
-}
+#include "variables.fx"
  
-cbuffer MatrixView : register(b1)
-{
-    matrix viewMatrix;
-}
- 
-cbuffer MatrixWorld : register(b2)
-{
-    matrix worldMatrix;
-}
- 
-cbuffer FurInfo : register(b3)
+cbuffer FurInfo
 {
     float length;
 	float3 gravity;
 }
  
-cbuffer IterationInfo : register(b4)
+cbuffer IterationInfo
 {
     float layerOffset;
 	float3 ___blank;
@@ -53,16 +40,15 @@ PixelInputType VShader(VertexInputType input)
 	input.position += float4(input.normal * layerOffset * length, 0);
 	input.position.w = 1.0f;
 	
-	float3 vGravity = mul(float4(gravity, 0), worldMatrix).xyz;
+	float3 vGravity = mul(float4(gravity, 0), _Object2World).xyz;
 	input.position += float4(vGravity * pow(layerOffset, 3), 0);
 	
-    matrix mvp = mul( projectionMatrix, mul( viewMatrix, worldMatrix ) );
-    output.position = mul( mvp, input.position );
+    output.position = mul(_MatrixMVP, input.position );
 	
     output.tex = input.tex;
 	output.alphaThreshold = layerOffset * .9;
 	
-	float3 normal = normalize(mul(float4(input.normal, 0), worldMatrix)).xyz;
+	float3 normal = normalize(mul(float4(input.normal, 0), _Object2World)).xyz;
 	output.normal = normal;
 	
 	output.light = dot(normalize(float4(input.position.xyz - float3(.8, .8, 1), 0)), float4(input.normal, 0));

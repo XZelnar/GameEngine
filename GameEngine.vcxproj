@@ -12,7 +12,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD9A7E9D-1377-4D30-892A-FE610AF39F77}</ProjectGuid>
-    <RootNamespace>GraphicsEngine</RootNamespace>
+    <RootNamespace>GameEngine</RootNamespace>
+    <ProjectName>GameEngine</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -50,7 +51,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(DXSDK_DIR)include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -76,6 +77,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="componentFurRenderer.h" />
+    <ClInclude Include="engineValue.h" />
     <ClInclude Include="GameObject\Component\componentCollider.h" />
     <ClInclude Include="GameObject\Component\componentColliderBox.h" />
     <ClInclude Include="GameObject\Component\componentColliderConvexVertices.h" />
@@ -83,6 +85,7 @@
     <ClInclude Include="GameObject\Component\componentContactListener.h" />
     <ClInclude Include="GameObject\Component\componentGUIRenderer.h" />
     <ClInclude Include="GameObject\Component\componentModelRenderer.h" />
+    <ClInclude Include="GameObject\Component\componentParticleSystem.h" />
     <ClInclude Include="GameObject\Component\componentRenderer.h" />
     <ClInclude Include="GameObject\Component\componentRigidBody.h" />
     <ClInclude Include="GameObject\Component\componentSpriteRenderer.h" />
@@ -104,6 +107,11 @@
     <ClInclude Include="Graphics\material.h" />
     <ClInclude Include="Graphics\materialsManager.h" />
     <ClInclude Include="Graphics\mesh.h" />
+    <ClInclude Include="Graphics\ParticleSystem\particle.h" />
+    <ClInclude Include="Graphics\ParticleSystem\psEmitter.h" />
+    <ClInclude Include="Graphics\ParticleSystem\psEmitterCircle.h" />
+    <ClInclude Include="Graphics\ParticleSystem\psEmitterMesh.h" />
+    <ClInclude Include="Graphics\ParticleSystem\psEmitterPoint.h" />
     <ClInclude Include="Graphics\renderHelper.h" />
     <ClInclude Include="Graphics\RenderTarget\renderTarget.h" />
     <ClInclude Include="Graphics\RenderTarget\renderTarget2D.h" />
@@ -127,6 +135,7 @@
     <ClInclude Include="Util\converter.h" />
     <ClInclude Include="Util\mathInline.h" />
     <ClInclude Include="Util\mathUtils.h" />
+    <ClInclude Include="Util\time.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +147,7 @@
     <ClCompile Include="GameObject\Component\componentContactListener.cpp" />
     <ClCompile Include="GameObject\Component\componentGUIRenderer.cpp" />
     <ClCompile Include="GameObject\Component\componentModelRenderer.cpp" />
+    <ClCompile Include="GameObject\Component\componentParticleSystem.cpp" />
     <ClCompile Include="GameObject\Component\componentRenderer.cpp" />
     <ClCompile Include="GameObject\Component\componentRigidBody.cpp" />
     <ClCompile Include="GameObject\Component\componentSpriteRenderer.cpp" />
@@ -157,6 +167,10 @@
     <ClCompile Include="Graphics\material.cpp" />
     <ClCompile Include="Graphics\materialsManager.cpp" />
     <ClCompile Include="Graphics\mesh.cpp" />
+    <ClCompile Include="Graphics\ParticleSystem\psEmiterPoint.cpp" />
+    <ClCompile Include="Graphics\ParticleSystem\psEmitter.cpp" />
+    <ClCompile Include="Graphics\ParticleSystem\psEmitterCircle.cpp" />
+    <ClCompile Include="Graphics\ParticleSystem\psEmitterMesh.cpp" />
     <ClCompile Include="Graphics\renderHelper.cpp" />
     <ClCompile Include="Graphics\RenderTarget\renderTarget.cpp" />
     <ClCompile Include="Graphics\RenderTarget\renderTarget2D.cpp" />
@@ -176,6 +190,7 @@
     <ClCompile Include="Scene\scene.cpp" />
     <ClCompile Include="Scene\sceneManager.cpp" />
     <ClCompile Include="Util\mathUtils.cpp" />
+    <ClCompile Include="Util\time.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

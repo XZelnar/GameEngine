@@ -9,6 +9,7 @@ class ComponentCollider;
 class ComponentRigidBody;
 class ComponentContactListener;
 class ComponentRenderer;
+class ComponentParticleSystem;
 class Transformation;
 
 class GameObject
@@ -49,24 +50,27 @@ public:
 
 	virtual void OnCollisionDetected(const hkpContactPointEvent& collision) { }
 	
-	GameObject* GetParent() { return parent; }
-	Transformation* GetTransformation() { return transformation; }
-	ComponentCollider* GetCollider() { return collider; }
-	ComponentRigidBody* GetRigidBody() { return rigidBody; }
-	ComponentContactListener* GetContactListener() { return contactListener; }
-	ComponentRenderer* GetRenderer() { return renderer; }
+	inline GameObject* GetParent() { return parent; }
+	inline Transformation* GetTransformation() { return transformation; }
+	inline ComponentCollider* GetCollider() { return collider; }
+	inline ComponentRigidBody* GetRigidBody() { return rigidBody; }
+	inline ComponentContactListener* GetContactListener() { return contactListener; }
+	inline ComponentRenderer* GetRenderer() { return renderer; }
+	inline ComponentParticleSystem* GetParticleSystem() { return particleSystem; }
 
 	bool HasParent() { return parent; }
 	bool HasCollider() { return collider; }
 	bool HasRigidBody() { return rigidBody; }
 	bool HasContactListener() { return contactListener; }
 	bool HasRenderer() { return renderer; }
+	bool HasParticleSystem() { return particleSystem; }
 
 	void SetParent(GameObject* _parent);
 	void SetCollider(ComponentCollider* _collider);
 	void SetRigidBody(ComponentRigidBody* _rigidBody);
 	void SetContactListener(ComponentContactListener* _contactListener);
 	void SetRenderer(ComponentRenderer* _renderer);
+	void SetParticleSystem(ComponentParticleSystem* _particleSystem);
 
 	void AddChild(GameObject* o);
 	void RemoveChild(GameObject* o);
@@ -77,6 +81,7 @@ protected:
 	ComponentRigidBody* rigidBody;
 	ComponentContactListener* contactListener;
 	ComponentRenderer* renderer;
+	ComponentParticleSystem* particleSystem;
 	unsigned int ID, loadedID;
 	GameObject* parent;
 	vector<GameObject*> children;

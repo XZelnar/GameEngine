@@ -5,9 +5,8 @@
 class ComponentFurRenderer : public ComponentModelRenderer
 {
 public:
-	virtual void Render();
+	virtual void Render(D3DXMATRIX* world);
 
 public:
 	int iterations;
-	int materialIterVarIndex;
 };

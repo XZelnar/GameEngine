@@ -16,6 +16,15 @@ D3DXMATRIX Camera::GetProjectionMatrix()
 	return projectionMatrix;
 }
 
+D3DXMATRIX Camera::GetViewProjectionMatrix()
+{
+	if (recalculateViewMatrix)
+		updateViewMatrix();
+	if (recalculateProjectionMatrix)
+		updateProjectionMatrix();
+	return viewProjectionMatrix;
+}
+
 D3DXVECTOR3 Camera::ScreenPointToWorldDirection(D3DXVECTOR2& point)
 {
 	if (recalculateProjectionMatrix)

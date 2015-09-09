@@ -44,11 +44,8 @@ D3DXMATRIX* Transformation::GetTransformationMatrix()
 		recalculateMatrix();
 	if (parent->HasParent())
 	{
-		static D3DXMATRIX t;
-		t = *parent->GetParent()->GetTransformation()->GetRotationMatrix();
-		D3DXMatrixInverse(&t, null, &t);
-		t = mWorld * *parent->GetParent()->GetTransformation()->GetTransformationMatrix();
-		return &t;
+		mWorldWParent = mWorld * *parent->GetParent()->GetTransformation()->GetTransformationMatrix();
+		return &mWorldWParent;
 	}
 	else
 		return &mWorld;
@@ -176,6 +173,6 @@ void Transformation::recalculateMatrix()
 	D3DXMatrixRotationY(&mRotY, rotation.y);
 	D3DXMatrixRotationZ(&mRotZ, rotation.z);
 	D3DXMatrixScaling(&mScale, scale.x, scale.y, scale.z);
-	mRot = mRotX * mRotY * mRotZ * preMatrix;
-	mWorld = mScale * mRotX * mRotY * mRotZ * preMatrix * postMatrix * mPos;
+	mRot = mRotX * mRotY * mRotZ;
+	mWorld = mScale * mRot * preMatrix * postMatrix * mPos;
 }

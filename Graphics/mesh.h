@@ -12,7 +12,7 @@ public://static
 	struct VERTEX
 	{
 		D3DXVECTOR3 POSITION;
-		D3DVECTOR NORMAL;
+		D3DXVECTOR3 NORMAL;
 		D3DXVECTOR2 TEXCOORD;
 	};
 
@@ -24,6 +24,8 @@ public:
 	void SetRawData(void* _data, int vertexCount, int _sizeOfData, UINT _stride);
 	void updateVBO();
 	int GetVertexCount() { return verticesCount; }
+	inline D3D11_PRIMITIVE_TOPOLOGY GetTopology() { return topology; }
+	VERTEX GetVertex(int index);
 #if DEBUG
 	void SetName(char* name);
 #endif

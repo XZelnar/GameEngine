@@ -11,7 +11,7 @@ public:
 	virtual void Initialize(GameObject* _parent) { parent = _parent; };
 	virtual void Dispose();
 	void SetBorder(float b, float bPix);
-	virtual void GUI();
+	virtual void GUI(D3DXMATRIX* world);
 
 protected:
 	virtual void updateMatrix();

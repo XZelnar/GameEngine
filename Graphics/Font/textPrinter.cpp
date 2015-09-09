@@ -15,7 +15,7 @@ void TextPrinter::Print(const std::string& text, const char* fontName, int fontS
 	font = FontManager::GetInstance().GetFont((char*)fontName, fontSize, fontStyle);
 	if (!font)
 		return;
-	m->SetPixelCBuffer(0, color);
+	m->SetColor(color);
 	m->Activate();
 	ShaderManager::SetMatrixWorld(mWorld);
 	font->Print(text, alignment, width, cache);

@@ -11,7 +11,7 @@ public:
 	GameObject* GetParent() { return parent; }
 
 public:
-	virtual void Initialize(GameObject* _parent) = 0;
+	virtual void Initialize(GameObject* _parent) { parent = _parent; };
 	virtual void Dispose() = 0;
 	virtual void Update() = 0;
 	virtual void Render() = 0;

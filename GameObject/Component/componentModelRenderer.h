@@ -13,15 +13,13 @@ class ComponentModelRenderer : public ComponentRenderer
 {
 public:
 	ComponentModelRenderer();
-	virtual void Initialize(GameObject* parent);
 	virtual void Dispose(){}
 	virtual void Update(){}
-	virtual void Render();
+	virtual void Render(D3DXMATRIX* world);
 
 	void SetMesh(Mesh* m);
 	Mesh* GetMesh() { return mesh; }
 
 protected:
 	Mesh* mesh;
-	Transformation* pTransformation;
 };

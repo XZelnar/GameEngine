@@ -135,7 +135,7 @@ Texture* GraphicsResourceManager::loadTexture(LPCWSTR filename)
 
 Shader* GraphicsResourceManager::loadShader(LPCWSTR filename)
 {
-	Shader* s = Shader::LoadFromFile(filename);
+	Shader* s = Shader::CompileFromFile(filename);
 	if (s != NULL)
 	{
 		shaders[filename] = s;
